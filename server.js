@@ -219,13 +219,11 @@ const runTests = (maxCount, corpus) => {
     ++testCount;
   }
 
-  results = results.map(v => {
-    return {
-      fuzziness: v.fuzziness,
-      naiveAverageResult: v.naiveResult / maxCount,
-      cleverAverageResult: v.cleverResult / maxCount,
-    };
-  });
+  results = results.map(v => ({
+    fuzziness: v.fuzziness,
+    naiveAverageResult: v.naiveResult / maxCount,
+    cleverAverageResult: v.cleverResult / maxCount,
+  }));
   const bestCleverResult = results.sort((a, b) => b.cleverAverageResult - a.cleverAverageResult)[0];
   console.log(`Got best results with fuzziness rate ${bestCleverResult.fuzziness}. Average success rate: ${bestCleverResult.cleverAverageResult}. Naive approach on the other hand produced accuracy ${bestCleverResult.naiveAverageResult}`);
 };
